@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { nanoid } from "nanoid";
+import VideoListAwesome from './components/VideoListAwesome';
 
 function DateTime(props) {
   return <p className="date">{props.date}</p>;
@@ -21,37 +22,10 @@ function Video(props) {
 }
 
 function VideoList(props) {
-  console.log(props);
   return props.list.map((item) => (
     <Video key={nanoid()} url={item.url} date={item.date} />
   ));
 }
-
-const VideoListAwesome = ({ Component, props }) => {
-  const modifiedProps = props.map((item) => {
-    const dateNow = new Date();
-    const dateNative = new Date(item.date);
-    const timeLast = dateNow - dateNative;
-    if (timeLast < 1000 * 60 * 60) {
-      return (item.date = `${Math.floor(timeLast / (1000 * 60))} минут назад`);
-    }
-    if (timeLast > 1000 * 60 * 60 && timeLast < 24 * 1000 * 60 * 60) {
-      return (item.date = `${Math.floor(
-        timeLast / (1000 * 60 * 60)
-      )} часов назад`);
-    }
-    if (timeLast > 24 * 1000 * 60 * 60) {
-      return (item.date = `${Math.floor(
-        timeLast / (24 * 1000 * 60 * 60)
-      )} дней назад`);
-    }
-  });
-  return class extends React.Component {
-    render() {
-      return <Component props={modifiedProps} />;
-    }
-  };
-};
 
 export default function App() {
   const [list, setList] = useState([
@@ -80,5 +54,5 @@ export default function App() {
       date: "2017-12-02 05:24:00",
     },
   ]);
-  return <VideoListAwesome Component={<VideoList />} props={list} />;
+  return <VideoListAwesome Component={VideoList} props={list} />;
 }
