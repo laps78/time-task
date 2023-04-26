@@ -1,27 +1,23 @@
-import React from 'react';
+import React from "react";
 
 export default function VideoListAwesome({ Component, props }) {
-  const modifiedProps = props.map((item) => {
+  props.list.map((item) => {
     const dateNow = new Date();
     const dateNative = new Date(item.date);
     const timeLast = dateNow - dateNative;
     if (timeLast < 1000 * 60 * 60) {
-      return (item.date = `${Math.floor(timeLast / (1000 * 60))} минут назад`);
+      item.date = `${Math.floor(timeLast / (1000 * 60))} минут назад`;
+      return item;
     }
     if (timeLast > 1000 * 60 * 60 && timeLast < 24 * 1000 * 60 * 60) {
-      return (item.date = `${Math.floor(
-        timeLast / (1000 * 60 * 60)
-      )} часов назад`);
+      item.date = `${Math.floor(timeLast / (1000 * 60 * 60))} часов назад`;
+      return item;
     }
     if (timeLast > 24 * 1000 * 60 * 60) {
-      return (item.date = `${Math.floor(
-        timeLast / (24 * 1000 * 60 * 60)
-      )} дней назад`);
+      item.date = `${Math.floor(timeLast / (24 * 1000 * 60 * 60))} дней назад`;
+      return item;
     }
   });
-  return class extends React.Component {
-    render() {
-      return <Component props={modifiedProps} />;
-    }
-  };
+
+  return <Component props={{ ...props }} />;
 }

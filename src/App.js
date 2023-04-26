@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { nanoid } from "nanoid";
-import VideoListAwesome from './components/VideoListAwesome';
+import VideoListAwesome from "./components/VideoListAwesome";
 
 function DateTime(props) {
   return <p className="date">{props.date}</p>;
@@ -21,8 +21,10 @@ function Video(props) {
   );
 }
 
-function VideoList(props) {
-  return props.list.map((item) => <Video key={nanoid()} url={item.url} date={item.date} />);
+function VideoList({ props }) {
+  return props.list.map((item) => (
+    <Video key={nanoid()} url={item.url} date={item.date} />
+  ));
 }
 
 export default function App() {
@@ -53,5 +55,5 @@ export default function App() {
     },
   ]);
 
-  return <VideoListAwesome Component={VideoList} props={list} />;
+  return <VideoListAwesome Component={VideoList} props={{ list }} />;
 }
