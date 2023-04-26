@@ -22,9 +22,7 @@ function Video(props) {
 }
 
 function VideoList(props) {
-  return props.list.map((item) => (
-    <Video key={nanoid()} url={item.url} date={item.date} />
-  ));
+  return props.list.map((item) => <Video key={nanoid()} url={item.url} date={item.date} />);
 }
 
 export default function App() {
@@ -54,5 +52,6 @@ export default function App() {
       date: "2017-12-02 05:24:00",
     },
   ]);
+
   return <VideoListAwesome Component={VideoList} props={list} />;
 }

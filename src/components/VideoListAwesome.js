@@ -1,6 +1,6 @@
 import React from 'react';
 
-function VideoListAwesome({ Component, props }) {
+export default function VideoListAwesome({ Component, props }) {
   const modifiedProps = props.map((item) => {
     const dateNow = new Date();
     const dateNative = new Date(item.date);
@@ -24,6 +24,4 @@ function VideoListAwesome({ Component, props }) {
       return <Component props={modifiedProps} />;
     }
   };
-};
-
-export default VideoListAwesome;
+}
